@@ -1,0 +1,56 @@
+public class MyClass {
+    public static void main(String args[]) {
+      MyClass m = new MyClass();
+      if(m.checkOneEdit("pale","bake")){
+          System.out.println("one edit away");
+      }
+      else{
+         System.out.println("many edit away"); 
+      }
+
+    }
+    
+    public  boolean checkOneEdit(String x,String y){
+        if (x == null || y == null || (Math.abs(x.length() - y.length()) > 1)) return false;
+        
+        
+        //Replace
+        if (x.length() == y.length()){
+            return checkReplace(x,y);
+        }
+        //insert
+        else if (x.length() > y.length()){
+            return checkInsert(x,y);
+        }
+        else{
+            return checkInsert(y,x);
+        }
+    }
+    
+    private boolean checkReplace(String x,String y){
+        int diff =0;
+        for(int i=0;i<x.length();i++){
+            if (x.charAt(i) != y.charAt(i)) diff++;
+            if (diff > 1) return false;
+        }
+        return true;
+        
+        
+    }
+     private boolean checkInsert(String x,String y){
+        int ll =x.length()-1;
+        int sl =y.length()-1;
+        int a=0,b=0,diff =0; 
+        while(a<=ll && b<= sl){
+            while (x.charAt(a) != y.charAt(b)){
+                a++; diff++;
+            }
+            if (diff > 1) return false;
+            a++;
+            b++;
+        }
+        return true;
+        
+        
+    }
+}
