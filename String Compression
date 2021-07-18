@@ -1,0 +1,25 @@
+public class MyClass {
+    public static void main(String args[]) {
+      MyClass m = new MyClass();
+      System.out.println("compressed string: "+m.stringCompression("aabcccccaaa")); //a2b1c5a3.
+    }
+    
+    public String stringCompression(String s){
+        if (s == null || s.length() ==0 ) return s;
+        StringBuilder rs = new StringBuilder();
+       // rs.append(s.charAt(0)); 
+       int cnt =1;
+        for(int i=1;i<s.length();i++){
+            if (s.charAt(i) != s.charAt(i-1)){
+                rs.append(s.charAt(i-1)).append(cnt);
+                cnt =1;
+            }
+            else{
+            cnt++;
+            }
+        }
+        rs.append(s.charAt(s.length()-1)).append(cnt);
+        return rs.toString().length() < s.length() ? rs.toString(): s;
+        
+    }
+}
